@@ -1,0 +1,16 @@
+{
+  "packages": [
+    "crdt"
+  ],
+  "info": {
+    "description": "Conflict-free replicated data types for Pony",
+    "homepage": "https://github.com/ponylang/crdt",
+    "license": "BSD-2-Clause",
+    "documentation_url": "https://ponylang.github.io/crdt/",
+    "version": "0.0.0",
+    "name": "crdt"
+  },
+  "deps": [
+    {}
+  ]
+}
