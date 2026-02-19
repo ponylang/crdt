@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
+- Add core CRDT types ([PR #3](https://github.com/ponylang/crdt/pull/3))
 
 ### Changed
+
 
