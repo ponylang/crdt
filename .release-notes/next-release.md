@@ -40,3 +40,4 @@ actor Main
 
     env.out.print(a.string()) // "30"
 ```
+
