@@ -1,10 +1,22 @@
 # crdt
 
-Conflict-free replicated data types for Pony.
+Conflict-free replicated data types (CRDTs) for Pony, based on delta-state replication.
 
 ## Status
 
-crdt is in early development.
+The following CRDT types are implemented:
+
+**Counters:** `GCounter`, `PNCounter`, `CCounter`
+
+**Sets:** `GSet`, `P2Set`, `TSet`, `AWORSet`, `RWORSet`
+
+**Registers:** `TReg`, `MVReg`
+
+**Collections:** `TLog`, `CKeyspace`
+
+Each type supports convergent merging of concurrent updates so that all replicas eventually reach the same state without coordination. All mutator methods accept and return convergent delta-states for efficient replication.
+
+See the `examples/` directory for usage demonstrations of each type.
 
 ## Installation
 
