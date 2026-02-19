@@ -4,6 +4,10 @@ Conflict-free replicated data types (CRDTs) for Pony, based on delta-state repli
 
 ## Status
 
+The API might change but it is usable in production software.
+
+## Overview
+
 The following CRDT types are implemented:
 
 **Counters:** `GCounter`, `PNCounter`, `CCounter`
