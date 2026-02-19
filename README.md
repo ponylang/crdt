@@ -25,7 +25,7 @@ See the `examples/` directory for usage demonstrations of each type.
 ## Installation
 
 * Install [corral](https://github.com/ponylang/corral)
-* `corral add github.com/ponylang/crdt.git --version 0.0.0`
+* `corral add github.com/ponylang/crdt.git --version 0.1.0`
 * `corral fetch` to fetch your dependencies
 * `use "crdt"` to include this package
 * `corral run -- ponyc` to compile your application
