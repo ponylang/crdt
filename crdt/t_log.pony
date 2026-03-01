@@ -101,7 +101,7 @@ class ref TLog[
     """
     // Optimize for the common case of this new entry being the latest one.
     try
-      match _compare(this(0)?, (value', timestamp'))
+      match \exhaustive\ _compare(this(0)?, (value', timestamp'))
       | Equal   => return None // this entry already exists
       | Less    => return 0    // this new entry belongs at the head
       | Greater => None        // this new entry belongs somewhere else
@@ -115,7 +115,7 @@ class ref TLog[
     try
       while max >= min do
         let index = (min + max) / 2
-        match _compare(this(index)?, (value', timestamp'))
+        match \exhaustive\ _compare(this(index)?, (value', timestamp'))
         | Greater => min = index + 1
         | Less    => max = index - 1
         | Equal   => return None
@@ -137,7 +137,7 @@ class ref TLog[
     try
       while max >= min do
         var index = (min + max) / 2
-        match this(index)?._2.compare(timestamp')
+        match \exhaustive\ this(index)?._2.compare(timestamp')
         | Greater => min = index + 1
         | Less    => max = index - 1
         | Equal   => min = index + 1
@@ -255,7 +255,7 @@ class ref TLog[
 
         if that_pair._2 < _cutoff then break end
 
-        match _compare(this_pair, that_pair)
+        match \exhaustive\ _compare(this_pair, that_pair)
         | Greater => that_index = that_index - 1 // hold back that_index
         | Less    => changed = true; _values.insert(this_index, that_pair)?
         | Equal   => None
