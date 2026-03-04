@@ -2,7 +2,7 @@
 
 Each example creates replicas, performs mutations, converges state, and prints results to demonstrate the key semantic property of each CRDT type.
 
-Build all examples with `make build-examples`.
+Build all examples with `make examples`.
 
 ## Counters
 
