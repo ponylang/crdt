@@ -1,6 +1,6 @@
 use "pony_test"
 
-primitive _TestTokensWellFormed
+primitive \nodoc\ _TestTokensWellFormed
   fun apply(h: TestHelper, tokens: Tokens, loc: SourceLoc = __loc) =>
     var expected: USize = 1
     var actual:   USize = 0

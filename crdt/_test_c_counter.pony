@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestCCounter is UnitTest
+class \nodoc\ _TestCCounter is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CCounter"
 
@@ -61,7 +61,7 @@ class _TestCCounter is UnitTest
     h.assert_eq[CCounter](b, c)
     h.assert_eq[CCounter](c, a)
 
-class _TestCCounterDelta is UnitTest
+class \nodoc\ _TestCCounterDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CCounter (ẟ)"
 
@@ -122,7 +122,7 @@ class _TestCCounterDelta is UnitTest
     h.assert_eq[CCounter](b, c)
     h.assert_eq[CCounter](c, a)
 
-class _TestCCounterTokens is UnitTest
+class \nodoc\ _TestCCounterTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CCounter (tokens)"
 

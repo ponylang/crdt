@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestTReg is UnitTest
+class \nodoc\ _TestTReg is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TReg"
 
@@ -55,7 +55,7 @@ class _TestTReg is UnitTest
     h.assert_eq[U64](b.timestamp(), 5)
     h.assert_eq[U64](c.timestamp(), 5)
 
-class _TestTRegDelta is UnitTest
+class \nodoc\ _TestTRegDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TReg (ẟ)"
 
@@ -110,7 +110,7 @@ class _TestTRegDelta is UnitTest
     h.assert_eq[U64](b.timestamp(), 5)
     h.assert_eq[U64](c.timestamp(), 5)
 
-class _TestTRegTokens is UnitTest
+class \nodoc\ _TestTRegTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TReg (tokens)"
 

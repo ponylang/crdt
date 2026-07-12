@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestTLog is UnitTest
+class \nodoc\ _TestTLog is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TLog"
 
@@ -176,7 +176,7 @@ class _TestTLog is UnitTest
     h.assert_eq[USize](0, b.size())
     h.assert_eq[USize](0, c.size())
 
-class _TestTLogDelta is UnitTest
+class \nodoc\ _TestTLogDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TLog (ẟ)"
 
@@ -327,7 +327,7 @@ class _TestTLogDelta is UnitTest
     h.assert_eq[USize](0, b.size())
     h.assert_eq[USize](0, c.size())
 
-class _TestTLogTokens is UnitTest
+class \nodoc\ _TestTLogTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TLog (tokens)"
 

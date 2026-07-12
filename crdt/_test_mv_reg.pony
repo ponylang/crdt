@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestMVReg is UnitTest
+class \nodoc\ _TestMVReg is UnitTest
   new iso create() => None
   fun name(): String => "crdt.MVReg"
 
@@ -50,7 +50,7 @@ class _TestMVReg is UnitTest
     h.assert_eq[MVReg[String]](b, c)
     h.assert_eq[MVReg[String]](c, a)
 
-class _TestMVRegDelta is UnitTest
+class \nodoc\ _TestMVRegDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.MVReg (ẟ)"
 
@@ -100,7 +100,7 @@ class _TestMVRegDelta is UnitTest
     h.assert_eq[MVReg[String]](b, c)
     h.assert_eq[MVReg[String]](c, a)
 
-class _TestMVRegTokens is UnitTest
+class \nodoc\ _TestMVRegTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.MVReg (tokens)"
 
