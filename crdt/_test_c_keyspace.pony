@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestCKeyspace is UnitTest
+class \nodoc\ _TestCKeyspace is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CKeyspace"
 
@@ -85,7 +85,7 @@ class _TestCKeyspace is UnitTest
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("date")?.value() else 0xDEAD end, 0xDEAD)
 
-class _TestCKeyspaceDelta is UnitTest
+class \nodoc\ _TestCKeyspaceDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CKeyspace (ẟ)"
 
@@ -159,7 +159,7 @@ class _TestCKeyspaceDelta is UnitTest
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("date")?.value() else 0xDEAD end, 0xDEAD)
 
-class _TestCKeyspaceTokens is UnitTest
+class \nodoc\ _TestCKeyspaceTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.CKeyspace (tokens)"
 

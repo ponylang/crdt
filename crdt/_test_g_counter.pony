@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestGCounter is UnitTest
+class \nodoc\ _TestGCounter is UnitTest
   new iso create() => None
   fun name(): String => "crdt.GCounter"
 
@@ -61,7 +61,7 @@ class _TestGCounter is UnitTest
     h.assert_eq[GCounter](b, c)
     h.assert_eq[GCounter](c, a)
 
-class _TestGCounterDelta is UnitTest
+class \nodoc\ _TestGCounterDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.GCounter (ẟ)"
 
@@ -122,7 +122,7 @@ class _TestGCounterDelta is UnitTest
     h.assert_eq[GCounter](b, c)
     h.assert_eq[GCounter](c, a)
 
-class _TestGCounterTokens is UnitTest
+class \nodoc\ _TestGCounterTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.GCounter (tokens)"
 
@@ -150,7 +150,7 @@ class _TestGCounterTokens is UnitTest
       h.fail("failed to parse token stream")
     end
 
-class _TestGCounterMax is UnitTest
+class \nodoc\ _TestGCounterMax is UnitTest
   new iso create() => None
   fun name(): String => "crdt.GCounter (max)"
   fun apply(h: TestHelper) =>

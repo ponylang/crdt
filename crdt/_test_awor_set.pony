@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestAWORSet is UnitTest
+class \nodoc\ _TestAWORSet is UnitTest
   new iso create() => None
   fun name(): String => "crdt.AWORSet"
 
@@ -84,7 +84,7 @@ class _TestAWORSet is UnitTest
     h.assert_eq[AWORSet[String]](b, c)
     h.assert_eq[AWORSet[String]](c, a)
 
-class _TestAWORSetDelta is UnitTest
+class \nodoc\ _TestAWORSetDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.AWORSet (ẟ)"
 
@@ -166,7 +166,7 @@ class _TestAWORSetDelta is UnitTest
     h.assert_eq[AWORSet[String]](b, c)
     h.assert_eq[AWORSet[String]](c, a)
 
-class _TestAWORSetTokens is UnitTest
+class \nodoc\ _TestAWORSetTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.AWORSet (tokens)"
 

@@ -1,6 +1,6 @@
 use "pony_test"
 
-class _TestPNCounter is UnitTest
+class \nodoc\ _TestPNCounter is UnitTest
   new iso create() => None
   fun name(): String => "crdt.PNCounter"
 
@@ -61,7 +61,7 @@ class _TestPNCounter is UnitTest
     h.assert_eq[PNCounter](b, c)
     h.assert_eq[PNCounter](c, a)
 
-class _TestPNCounterDelta is UnitTest
+class \nodoc\ _TestPNCounterDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.PNCounter (ẟ)"
 
@@ -122,7 +122,7 @@ class _TestPNCounterDelta is UnitTest
     h.assert_eq[PNCounter](b, c)
     h.assert_eq[PNCounter](c, a)
 
-class _TestPNCounterTokens is UnitTest
+class \nodoc\ _TestPNCounterTokens is UnitTest
   new iso create() => None
   fun name(): String => "crdt.PNCounter (tokens)"
 
