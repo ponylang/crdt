@@ -62,7 +62,8 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
   fun ref increment[D: CCounter[A] ref = CCounter[A]](
     value': A = 1,
     delta': D = recover CCounter[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Increment the counter by the given value.
     Accepts and returns a convergent delta-state.
@@ -73,7 +74,8 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
   fun ref decrement[D: CCounter[A] ref = CCounter[A]](
     value': A = 1,
     delta': D = recover CCounter[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Decrement the counter by the given value.
     Accepts and returns a convergent delta-state.
@@ -83,7 +85,8 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
 
   fun ref clear[D: CCounter[A] ref = CCounter[A]](
     delta': D = recover CCounter[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all locally visible changes to the counter, resetting it to zero.
     Accepts and returns a convergent delta-state.
@@ -118,7 +121,7 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
   fun gt(that: CCounter[A] box): Bool => value().gt(that.value())
   fun ge(that: CCounter[A] box): Bool => value().ge(that.value())
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

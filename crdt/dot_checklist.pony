@@ -14,5 +14,7 @@ class DotChecklist
   efficient anti-entropy mechanisms operating over the keyspace.
   """
   let _ctx: DotContext
+
   new ref create(ctx': DotContext) => _ctx = ctx'
+
   fun ref write() => _ctx.next_dot()

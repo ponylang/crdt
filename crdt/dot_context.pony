@@ -41,6 +41,9 @@ class ref DotContext is Replicated
     _dot_cloud = _dot_cloud.create()
 
   fun clone(): DotContext =>
+    """
+    Create a deep copy of this context.
+    """
     let that = create(_id)
     for (k, v) in _complete.pairs() do that._complete(k) = v end
     for d in _dot_cloud.values() do that._dot_cloud.set(d) end
@@ -203,21 +206,21 @@ class ref DotContext is Replicated
     let out = recover String end
     out.append("(DotContext")
     for (id', n) in _complete.pairs() do
-      out.>push(';').>push(' ')
+      out .> push(';') .> push(' ')
       out.append(id'.string())
-      out.>push(' ').>push('<').>push('=').>push(' ')
+      out .> push(' ') .> push('<') .> push('=') .> push(' ')
       out.append(n.string())
     end
     for (id', n) in _dot_cloud.values() do
-      out.>push(';').>push(' ')
+      out .> push(';') .> push(' ')
       out.append(id'.string())
-      out.>push(' ').>push('=').>push('=').>push(' ')
+      out .> push(' ') .> push('=') .> push('=') .> push(' ')
       out.append(n.string())
     end
     out.push(')')
     out
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

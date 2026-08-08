@@ -1,4 +1,8 @@
 trait Convergent[A: Convergent[A] #read]
+  """
+  A data type that supports convergent merging from a complete or delta state.
+  """
+
   fun ref converge(that: box->A): Bool
     """
     Converge from that data structure into this one, mutating this one.

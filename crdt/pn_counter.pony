@@ -42,7 +42,9 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -74,12 +76,13 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
   fun ref increment[D: PNCounter[A] ref = PNCounter[A]](
     value': A = 1,
     delta': D = recover PNCounter[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Increment the counter by the given value.
     Accepts and returns a convergent delta-state.
     """
-    let v' = _pos.upsert(_id, value', {(v: A, value': A): A => v + value' })
+    let v' = _pos.upsert(_id, value', {(v: A, value': A): A => v + value'  })
     _checklist_write()
     delta'._pos_update(_id, v')
     consume delta'
@@ -87,12 +90,13 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
   fun ref decrement[D: PNCounter[A] ref = PNCounter[A]](
     value': A = 1,
     delta': D = recover PNCounter[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Decrement the counter by the given value.
     Accepts and returns a convergent delta-state.
     """
-    let v' = _neg.upsert(_id, value', {(v: A, value': A): A => v + value' })
+    let v' = _neg.upsert(_id, value', {(v: A, value': A): A => v + value'  })
     _checklist_write()
     delta'._neg_update(_id, v')
     consume delta'
@@ -138,7 +142,7 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
   fun gt(that: PNCounter[A] box): Bool => value().gt(that.value())
   fun ge(that: PNCounter[A] box): Bool => value().ge(that.value())
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

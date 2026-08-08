@@ -171,16 +171,16 @@ class \nodoc\ _TestRWORSetTokens is UnitTest
   fun name(): String => "crdt.RWORSet (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = RWORSet[String]("a".hash64())
-    let data'  = RWORSet[String]("b".hash64())
-    let data'' = RWORSet[String]("c".hash64())
+    let data    = RWORSet[String]("a".hash64())
+    let data_b  = RWORSet[String]("b".hash64())
+    let data_c  = RWORSet[String]("c".hash64())
 
     data.set("apple")
-    data'.unset("apple")
-    data''.set("banana")
+    data_b.unset("apple")
+    data_c.set("banana")
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)

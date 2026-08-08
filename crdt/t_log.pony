@@ -46,7 +46,9 @@ class ref TLog[
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -57,7 +59,7 @@ class ref TLog[
     """
     (_values.size() == 0) and (_cutoff == T.from[U8](0))
 
-  fun apply(index: USize): (A, T)? =>
+  fun apply(index: USize): (A, T) ? =>
     """
     Return the timestamp and value of the log entry at the given index.
     """
@@ -168,7 +170,8 @@ class ref TLog[
     value': A,
     timestamp': T,
     delta': D = D)
-  : D^ =>
+    : D^
+  =>
     """
     Write the value and timestamp to the log, preserving sort order,
     ignoring the write if its timestamp is earlier than the cutoff timestamp.
@@ -183,7 +186,8 @@ class ref TLog[
   fun ref raise_cutoff[D: TLog[A, T, B] ref = TLog[A, T, B]](
     cutoff': T,
     delta': D = D)
-  : D^ =>
+    : D^
+  =>
     """
     Set the cutoff timestamp (only if it higher than the current value).
     All entries earlier than the new cutoff timestamp will be discarded.
@@ -196,7 +200,8 @@ class ref TLog[
   fun ref trim[D: TLog[A, T, B] ref = TLog[A, T, B]](
     n': USize,
     delta': D = D)
-  : D^ =>
+    : D^
+  =>
     """
     Set the cutoff timestamp to the timestamp of the nth element, so that at
     least n' entries will be retained locally, but discarding all entries of
@@ -303,6 +308,7 @@ class ref TLog[
     consume buf
 
   fun ne(that: TLog[A, T, B] box): Bool => not eq(that)
+
   fun eq(that: TLog[A, T, B] box): Bool =>
     let this_iter = this.entries()
     let that_iter = that.entries()
@@ -319,7 +325,7 @@ class ref TLog[
       false
     end
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

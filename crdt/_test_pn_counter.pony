@@ -127,16 +127,16 @@ class \nodoc\ _TestPNCounterTokens is UnitTest
   fun name(): String => "crdt.PNCounter (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = PNCounter[U8]("a".hash64())
-    let data'  = PNCounter[U8]("b".hash64())
-    let data'' = PNCounter[U8]("c".hash64())
+    let data    = PNCounter[U8]("a".hash64())
+    let data_b  = PNCounter[U8]("b".hash64())
+    let data_c  = PNCounter[U8]("c".hash64())
 
     data.increment(4)
-    data'.decrement(5)
-    data''.increment(6)
+    data_b.decrement(5)
+    data_c.increment(6)
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)

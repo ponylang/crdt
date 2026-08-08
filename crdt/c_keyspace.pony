@@ -33,7 +33,7 @@ class ref HashCKeyspace[
   fun keys(): Iterator[this->K]^ => _map.keys()
   fun values(): Iterator[this->V]^ => _map.values()
   fun pairs(): Iterator[(this->K, this->V)]^ => _map.pairs()
-  fun apply(k: box->K!): this->V? => _map(k)?
+  fun apply(k: box->K!): this->V ? => _map(k)?
 
   fun ref at(k: box->K!): V =>
     // TODO: add an optimized function in Pony's Map for this use case.
@@ -42,27 +42,29 @@ class ref HashCKeyspace[
       _map(k) = empty
       empty
     end
-
   // TODO: Find a way to bring remove functionality back?
   // fun ref remove[D: HashCKeyspace[K, V, H] ref = HashCKeyspace[K, V, H] ref]
-  //   (k: K, delta': D = recover D(0) end): D
+  // (k: K, delta': D = recover D(0) end): D
   // =>
-  //   try
-  //     let v = _map.remove(k)?._2
-  //     delta'.at(k).converge(v.clear())
-  //   end
-  //   consume delta'
-
+  // try
+  // let v = _map.remove(k)?._2
+  // delta'.at(k).converge(v.clear())
+  // end
+  // consume delta'
   // fun ref clear[D: HashCKeyspace[K, V, H] ref = HashCKeyspace[K, V, H] ref]
-  //   (delta': D = recover D(0) end): D
+  // (delta': D = recover D(0) end): D
   // =>
-  //   for (k, v) in _map.pairs() do
-  //     delta'.at(k).converge(v.clear())
-  //   end
-  //   _map.clear()
-  //   consume delta'
+  // for (k, v) in _map.pairs() do
+  // delta'.at(k).converge(v.clear())
+  // end
+  // _map.clear()
+  // consume delta'
 
   fun ref converge(that: HashCKeyspace[K, V, H] box): Bool =>
+    """
+    Merge state from that keyspace into this one.
+    Returns true if the convergence added new information.
+    """
     var changed = false
 
     // Temporarily disable convergence of the shared context.
@@ -75,13 +77,13 @@ class ref HashCKeyspace[
     // // For each entry that exists only here, and not in that keyspace,
     // // converge an imaginary empty instance into our local instance.
     // // This is how removals are propagated.
-    // // TODO: Ouch! This seems very inefficient to do as described in the paper.
-    // // How can we improve on this model, maybe sacrificing some failure modes?
+    // // TODO: This seems very inefficient as described in the paper.
+    // // How can we improve on this model?
     // for (k, v) in _map.pairs() do
-    //   if not that._map.contains(k) then
-    //     if v._converge_empty_in(that._ctx) then changed = true end
-    //     if v.is_empty() then try _map.remove(k)? end end
-    //   end
+  // if not that._map.contains(k) then
+  // if v._converge_empty_in(that._ctx) then changed = true end
+  // if v.is_empty() then try _map.remove(k)? end end
+  // end
     // end
 
     // For each entry in the other map, converge locally.
@@ -148,7 +150,7 @@ class ref HashCKeyspace[
     buf.push('}')
     consume buf
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """
@@ -193,7 +195,7 @@ class ref HashCKeyspace[
     """
     _ctx.each_token(tokens)
 
-  fun compare_history_with_tokens(that: TokensIterator): (Bool, Bool)? =>
+  fun compare_history_with_tokens(that: TokensIterator): (Bool, Bool) ? =>
     """
     Compare the causal context with that represented by the given token stream.
     Raises an error if the tokens couldn't be parsed as a causal context.

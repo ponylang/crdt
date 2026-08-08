@@ -127,16 +127,16 @@ class \nodoc\ _TestCCounterTokens is UnitTest
   fun name(): String => "crdt.CCounter (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = CCounter[U8]("a".hash64())
-    let data'  = CCounter[U8]("b".hash64())
-    let data'' = CCounter[U8]("c".hash64())
+    let data    = CCounter[U8]("a".hash64())
+    let data_b  = CCounter[U8]("b".hash64())
+    let data_c  = CCounter[U8]("c".hash64())
 
     data.increment(4)
-    data'.decrement(5)
-    data''.increment(6)
+    data_b.decrement(5)
+    data_c.increment(6)
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)

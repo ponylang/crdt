@@ -18,10 +18,10 @@ interface TokensIterator
   An iterator over serialized tokens, reading each value by its expected type.
   Raises an error if the next token cannot be cast to the requested type.
   """
-  fun ref next[A: Any val](): A?
+  fun ref next[A: Any val](): A ?
 
 class _TokensIterator
   let _iter: Iterator[Any val]
 
   new ref create(iter': Iterator[Any val]) => _iter = iter'
-  fun ref next[A: Any val](): A? => _iter.next()? as A
+  fun ref next[A: Any val](): A ? => _iter.next()? as A

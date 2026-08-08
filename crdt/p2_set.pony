@@ -32,7 +32,9 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -74,7 +76,8 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
   fun ref set[D: P2HashSet[A, H] ref = P2HashSet[A, H]](
     value: A,
     delta: D = recover P2HashSet[A, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add a value to the set.
     Accepts and returns a convergent delta-state.
@@ -89,7 +92,8 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
   fun ref unset[D: P2HashSet[A, H] ref = P2HashSet[A, H]](
     value: A,
     delta: D = recover P2HashSet[A, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove a value from the set.
     Accepts and returns a convergent delta-state.
@@ -104,7 +108,8 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
   fun ref union[D: P2HashSet[A, H] ref = P2HashSet[A, H]](
     that: Iterator[A],
     delta: D = recover P2HashSet[A, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add everything in the given iterator to the set.
     Accepts and returns a convergent delta-state.
@@ -165,7 +170,7 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
   fun ge(that: P2HashSet[A, H] box): Bool => result().ge(that.result())
   fun values(): Iterator[A]^ => result().values()
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

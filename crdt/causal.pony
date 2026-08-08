@@ -5,4 +5,8 @@ trait Causal[A: Causal[A] ref] is (Convergent[A] & Replicated)
   convergent merging, token-based serialization, and clearing all local state.
   """
   new ref create(id: ID)
+
   fun ref clear[D: A ref = A](delta': D = recover D(0) end): D
+    """
+    Clear all local state, returning a delta that propagates the clear.
+    """

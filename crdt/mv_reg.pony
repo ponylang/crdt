@@ -71,7 +71,8 @@ class ref MVHashReg[A: Equatable[A] val, H: HashFunction[A] val]
   fun ref update[D: MVHashReg[A, H] ref = MVHashReg[A, H]](
     value': A,
     delta': D = recover MVHashReg[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Set the value of the register, overriding all currently visible values.
     After this function, the register will have a single value locally, at least
@@ -84,7 +85,8 @@ class ref MVHashReg[A: Equatable[A] val, H: HashFunction[A] val]
 
   fun ref clear[D: MVHashReg[A, H] ref = MVHashReg[A, H]](
     delta': D = recover MVHashReg[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all locally visible elements from the set.
     Accepts and returns a convergent delta-state.
@@ -135,7 +137,7 @@ class ref MVHashReg[A: Equatable[A] val, H: HashFunction[A] val]
   fun ge(that: MVHashReg[A, H] box): Bool => result().ge(that.result())
   fun values(): Iterator[A]^ => result().values()
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """
