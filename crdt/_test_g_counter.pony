@@ -127,16 +127,16 @@ class \nodoc\ _TestGCounterTokens is UnitTest
   fun name(): String => "crdt.GCounter (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = GCounter[U8]("a".hash64())
-    let data'  = GCounter[U8]("b".hash64())
-    let data'' = GCounter[U8]("c".hash64())
+    let data    = GCounter[U8]("a".hash64())
+    let data_b  = GCounter[U8]("b".hash64())
+    let data_c  = GCounter[U8]("c".hash64())
 
     data.increment(4)
-    data'.increment(5)
-    data''.increment(6)
+    data_b.increment(5)
+    data_c.increment(6)
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)
@@ -153,31 +153,32 @@ class \nodoc\ _TestGCounterTokens is UnitTest
 class \nodoc\ _TestGCounterMax is UnitTest
   new iso create() => None
   fun name(): String => "crdt.GCounter (max)"
+
   fun apply(h: TestHelper) =>
-    let data   = GCounter[U8]("a".hash64())
-    let data'  = GCounter[U8]("b".hash64())
-    let data'' = GCounter[U8]("c".hash64())
+    let data    = GCounter[U8]("a".hash64())
+    let data_b  = GCounter[U8]("b".hash64())
+    let data_c  = GCounter[U8]("c".hash64())
 
     data.increment(250)
-    data'.increment(253)
-    data''.increment(254)
+    data_b.increment(253)
+    data_c.increment(254)
 
-    h.assert_true(data.converge(data'))
-    h.assert_true(data.converge(data''))
-    h.assert_true(data'.converge(data))
-    h.assert_false(data'.converge(data'')) // data' == data''
-    h.assert_true(data''.converge(data))
-    h.assert_false(data''.converge(data')) // data'' == data'
+    h.assert_true(data.converge(data_b))
+    h.assert_true(data.converge(data_c))
+    h.assert_true(data_b.converge(data))
+    h.assert_false(data_b.converge(data_c)) // data_b == data_c
+    h.assert_true(data_c.converge(data))
+    h.assert_false(data_c.converge(data_b)) // data_c == data_b
 
     data.increment(7)
-    data''.increment(1)
+    data_c.increment(1)
 
-    h.assert_true(data''.converge(data))
-    h.assert_false(data''.converge(data')) // data'' > data'
+    h.assert_true(data_c.converge(data))
+    h.assert_false(data_c.converge(data_b)) // data_c > data_b
 
     h.assert_eq[U8](data.value(), U8.max_value())
-    h.assert_eq[U8](data'.value(), U8.max_value())
-    h.assert_eq[U8](data''.value(), U8.max_value())
+    h.assert_eq[U8](data_b.value(), U8.max_value())
+    h.assert_eq[U8](data_c.value(), U8.max_value())
 
     data.increment(42)
     h.assert_eq[U8](data.value(), U8.max_value())

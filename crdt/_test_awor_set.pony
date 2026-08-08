@@ -171,16 +171,16 @@ class \nodoc\ _TestAWORSetTokens is UnitTest
   fun name(): String => "crdt.AWORSet (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = AWORSet[String]("a".hash64())
-    let data'  = AWORSet[String]("b".hash64())
-    let data'' = AWORSet[String]("c".hash64())
+    let data    = AWORSet[String]("a".hash64())
+    let data_b  = AWORSet[String]("b".hash64())
+    let data_c  = AWORSet[String]("c".hash64())
 
     data.set("apple")
-    data'.unset("apple")
-    data''.set("banana")
+    data_b.unset("apple")
+    data_c.set("banana")
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)

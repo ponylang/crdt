@@ -78,7 +78,8 @@ class ref DotKernel[A: Any val] is Replicated
   fun ref set[D: DotKernel[A] ref = DotKernel[A]](
     value': A,
     delta': D = recover DotKernel[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Add the given value to the map of active values, under this replica id.
     The next-sequence-numbered dot for this replica will be used, so that the
@@ -93,7 +94,8 @@ class ref DotKernel[A: Any val] is Replicated
   fun ref remove_value[E: EqFn[A] val, D: DotKernel[A] ref = DotKernel[A]](
     value': A,
     delta': D = recover DotKernel[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all dots with this value from the map of active values, using the
     given eq_fn for testing equality between pairs of values of type A.
@@ -120,7 +122,8 @@ class ref DotKernel[A: Any val] is Replicated
 
   fun ref remove_all[D: DotKernel[A] ref = DotKernel[A]](
     delta': D = recover DotKernel[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all dots currently present in the map of active values.
     They will be retained in the causal context.
@@ -218,17 +221,17 @@ class ref DotKernel[A: Any val] is Replicated
     let out = recover String end
     out.append("(DotKernel")
     for (dot, value) in _map.pairs() do
-      out.>push(';').>push(' ').>push('(')
+      out .> push(';') .> push(' ') .> push('(')
       out.append(dot._1.string())
-      out.>push(',').>push(' ')
+      out .> push(',') .> push(' ')
       out.append(dot._2.string())
-      out.>push(')').>push(' ').>push('-').>push('>').>push(' ')
+      out .> push(')') .> push(' ') .> push('-') .> push('>') .> push(' ')
       iftype A <: Stringable #read
       then out.append(value.string())
       else out.push('?')
       end
     end
-    out.>push(';').>push(' ')
+    out .> push(';') .> push(' ')
     out.append(_ctx.string())
     out
 

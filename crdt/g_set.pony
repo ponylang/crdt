@@ -24,7 +24,9 @@ class ref GHashSet[A: Any val, H: HashFunction[A] val]
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -58,7 +60,8 @@ class ref GHashSet[A: Any val, H: HashFunction[A] val]
   fun ref set[D: GHashSet[A, H] ref = GHashSet[A, H]](
     value: A,
     delta: D = recover GHashSet[A, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add a value to the set.
     Accepts and returns a convergent delta-state.
@@ -71,7 +74,8 @@ class ref GHashSet[A: Any val, H: HashFunction[A] val]
   fun ref union[D: GHashSet[A, H] ref = GHashSet[A, H]](
     that: Iterator[A],
     delta: D = recover GHashSet[A, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add everything in the given iterator to the set.
     Accepts and returns a convergent delta-state.
@@ -121,7 +125,7 @@ class ref GHashSet[A: Any val, H: HashFunction[A] val]
   fun ge(that: GHashSet[A, H] box): Bool => _data.ge(that._data)
   fun values(): Iterator[A]^ => _data.values()
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

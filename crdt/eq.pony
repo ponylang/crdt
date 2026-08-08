@@ -4,7 +4,11 @@ interface EqFn[A]
   A function object for testing equality of two values.
   """
   new val create()
+
   fun apply(a: A, a': A): Bool
+    """
+    Return true if `a` and `a'` are considered equal.
+    """
 
 primitive Eq[A: Equatable[A] #read]
   """

@@ -47,7 +47,9 @@ class ref TReg[
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -98,7 +100,8 @@ class ref TReg[
     value': A,
     timestamp': T,
     delta': D = D)
-  : D^ =>
+    : D^
+  =>
     """
     Update the value and timestamp of the register, provided that the given
     timestamp is newer than the current timestamp of the register.
@@ -147,7 +150,7 @@ class ref TReg[
   fun gt(that: TReg[A, V, T, B] box): Bool => value().gt(that.value())
   fun ge(that: TReg[A, V, T, B] box): Bool => value().ge(that.value())
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

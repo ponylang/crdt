@@ -1,5 +1,9 @@
 interface Replicated
-  fun ref from_tokens(that: TokensIterator)?
+  """
+  A data type that supports token-based serialization and deserialization.
+  """
+
+  fun ref from_tokens(that: TokensIterator) ?
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

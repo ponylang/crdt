@@ -2,7 +2,7 @@ use "pony_check"
 use "collections"
 
 class \nodoc\ val _PNCounterCmd is Stringable
-  let u_cmd: {(U64): U64 } val
+  let u_cmd: {(U64): U64} val
   let cc_cmd: {(PNCounter)} val
   let diff: U64
   let op: _CounterOp
@@ -10,17 +10,27 @@ class \nodoc\ val _PNCounterCmd is Stringable
   new val create(diff': U64, op': _CounterOp = _INC) =>
     diff = diff'
     op = op'
-    cc_cmd = {(cc) => if op is _INC then cc.increment(diff) else cc.decrement(diff) end } val
+    cc_cmd =
+      {(cc) =>
+        if op is _INC then cc.increment(diff)
+        else cc.decrement(diff)
+        end
+      } val
     u_cmd = {(t) => if op is _INC then t + diff else t - diff end } val
 
   fun string(): String iso^ =>
     recover
       String()
-        .>append(if op is _INC then "+" else "-" end + diff.string())
+        .> append(if op is _INC then "+" else "-" end + diff.string())
     end
 
-trait \nodoc\ _PNCounterProperty is Property1[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
-  fun property(sample: (USize, Array[_CmdOnReplica[_PNCounterCmd]]), h: PropertyHelper) ? =>
+trait \nodoc\ _PNCounterProperty is
+  Property1[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
+  fun property(
+    sample: (USize, Array[_CmdOnReplica[_PNCounterCmd]]),
+    h: PropertyHelper)
+    ?
+  =>
     """
     validate that an array of commands against random replicas
     converges to the same value as a U64 counter exposed to the same commands.
@@ -46,7 +56,6 @@ trait \nodoc\ _PNCounterProperty is Property1[(USize, Array[_CmdOnReplica[_PNCou
       if not h.assert_eq[U64](observer.value(), expected) then return end
     end
 
-
 class \nodoc\ _PNCounterIncProperty is _PNCounterProperty
   """
   verify that a set of PNCounter replicas that are only incremented
@@ -54,21 +63,30 @@ class \nodoc\ _PNCounterIncProperty is _PNCounterProperty
   """
   fun name(): String => "crdt.prop.PNCounter.Inc"
 
-  fun gen(): Generator[(USize, Array[_CmdOnReplica[_PNCounterCmd]])] =>
-    Generators.usize(2, 10).flat_map[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]({
-      (num_replicas) =>
-        let cmds_gen = Generators.array_of[_CmdOnReplica[_PNCounterCmd]](
-          Generators.map2[USize, U64, _CmdOnReplica[_PNCounterCmd]](
-            Generators.usize(0, num_replicas-1),
-            Generators.u64(),
-            {(replica, inc) => _CmdOnReplica[_PNCounterCmd](replica, _PNCounterCmd(inc, _INC)) }
+  fun gen():
+    Generator[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
+  =>
+    Generators.usize(2, 10)
+      .flat_map[
+        (USize, Array[_CmdOnReplica[_PNCounterCmd]])](
+      {(num_replicas) =>
+        let cmds_gen =
+          Generators.array_of[_CmdOnReplica[_PNCounterCmd]](
+            Generators.map2[
+              USize, U64, _CmdOnReplica[_PNCounterCmd]](
+              Generators.usize(0, num_replicas - 1),
+              Generators.u64(),
+              {(replica, inc) =>
+                _CmdOnReplica[_PNCounterCmd](
+                  replica, _PNCounterCmd(inc, _INC))
+              }
+            )
           )
-        )
-        Generators.zip2[USize, Array[_CmdOnReplica[_PNCounterCmd]]](
+        Generators.zip2[
+          USize, Array[_CmdOnReplica[_PNCounterCmd]]](
           Generators.unit[USize](num_replicas), cmds_gen
         )
     })
-
 
 class \nodoc\ _PNCounterIncDecProperty is _PNCounterProperty
   """
@@ -77,23 +95,34 @@ class \nodoc\ _PNCounterIncDecProperty is _PNCounterProperty
   """
   fun name(): String => "crdt.prop.PNCounter"
 
-  fun gen(): Generator[(USize, Array[_CmdOnReplica[_PNCounterCmd]])] =>
-    Generators.usize(2, 10).flat_map[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]({
-      (num_replicas) =>
-        let cmds_gen = Generators.array_of[_CmdOnReplica[_PNCounterCmd]](
-          Generators.map2[USize, _PNCounterCmd, _CmdOnReplica[_PNCounterCmd]](
-            Generators.usize(0, num_replicas-1),
-            Generators.u64().flat_map[_PNCounterCmd]({
-              (u) =>
-                Generators.one_of[_PNCounterCmd]([
-                  _PNCounterCmd(u, _INC)
-                  _PNCounterCmd(u, _DEC)
-                ])
-            }),
-            {(replica, cmd) => _CmdOnReplica[_PNCounterCmd](replica, cmd) }
+  fun gen():
+    Generator[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
+  =>
+    Generators.usize(2, 10)
+      .flat_map[
+        (USize, Array[_CmdOnReplica[_PNCounterCmd]])](
+      {(num_replicas) =>
+        let cmds_gen =
+          Generators.array_of[_CmdOnReplica[_PNCounterCmd]](
+            Generators.map2[
+              USize, _PNCounterCmd,
+              _CmdOnReplica[_PNCounterCmd]](
+              Generators.usize(0, num_replicas - 1),
+              Generators.u64().flat_map[_PNCounterCmd]({
+                (u) =>
+                  Generators.one_of[_PNCounterCmd](
+                    [ _PNCounterCmd(u, _INC)
+                      _PNCounterCmd(u, _DEC)
+                    ])
+              }),
+              {(replica, cmd) =>
+                _CmdOnReplica[_PNCounterCmd](
+                  replica, cmd)
+              }
+            )
           )
-        )
-        Generators.zip2[USize, Array[_CmdOnReplica[_PNCounterCmd]]](
+        Generators.zip2[
+          USize, Array[_CmdOnReplica[_PNCounterCmd]]](
           Generators.unit[USize](num_replicas), cmds_gen
         )
     })

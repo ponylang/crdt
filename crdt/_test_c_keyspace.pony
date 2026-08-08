@@ -10,7 +10,7 @@ class \nodoc\ _TestCKeyspace is UnitTest
     r: CKeyspace[String, CCounter],
     result_l: Bool,
     result_r: Bool,
-    loc: SourceLoc = __loc)?
+    loc: SourceLoc = __loc) ?
   =>
     let tokens = Tokens
     r.each_token_of_history(tokens)
@@ -21,7 +21,7 @@ class \nodoc\ _TestCKeyspace is UnitTest
     h.assert_eq[Bool](result_l, result_l', "result_l", loc)
     h.assert_eq[Bool](result_r, result_r', "result_r", loc)
 
-  fun apply(h: TestHelper)? =>
+  fun apply(h: TestHelper) ? =>
     let a = CKeyspace[String, CCounter]("a".hash64())
     let b = CKeyspace[String, CCounter]("b".hash64())
     let c = CKeyspace[String, CCounter]("c".hash64())
@@ -55,21 +55,18 @@ class \nodoc\ _TestCKeyspace is UnitTest
     h.assert_eq[String](a.string(), b.string())
     h.assert_eq[String](b.string(), c.string())
     h.assert_eq[String](c.string(), a.string())
-
     // TODO: Find a way to bring remove functionality back?
     // a.at("date").increment(9)
     // b.remove("date")
     // c.remove("currant")
     // a.remove("banana")
     // b.at("banana").increment(10)
-
     // h.assert_true(a.converge(b))
     // h.assert_true(a.converge(c))
     // h.assert_true(b.converge(c))
     // h.assert_true(b.converge(a))
     // h.assert_true(c.converge(a))
     // h.assert_false(c.converge(b))
-
     // h.assert_eq[U64](a.at("apple").value(), 5)
     // h.assert_eq[U64](a.at("banana").value(), 3)
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
@@ -77,9 +74,7 @@ class \nodoc\ _TestCKeyspace is UnitTest
     // h.assert_eq[String](a.string(), b.string())
     // h.assert_eq[String](b.string(), c.string())
     // h.assert_eq[String](c.string(), a.string())
-
     // a.clear()
-
     // h.assert_eq[U64](try a("apple")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("banana")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
@@ -119,25 +114,21 @@ class \nodoc\ _TestCKeyspaceDelta is UnitTest
     h.assert_eq[String](a.string(), b.string())
     h.assert_eq[String](b.string(), c.string())
     h.assert_eq[String](c.string(), a.string())
-
     // TODO: Find a way to bring remove functionality back?
     // a_delta = CKeyspace[String, CCounter](0)
     // b_delta = CKeyspace[String, CCounter](0)
     // c_delta = CKeyspace[String, CCounter](0)
-
     // a.at("date").increment(9, a_delta.at("date"))
     // b.remove("date", b_delta)
     // c.remove("currant", c_delta)
     // a.remove("banana", a_delta)
     // b.at("banana").increment(10, b_delta.at("banana"))
-
     // h.assert_true(a.converge(b_delta))
     // h.assert_true(a.converge(c_delta))
     // h.assert_true(b.converge(c_delta))
     // h.assert_true(b.converge(a_delta))
     // h.assert_true(c.converge(a_delta))
     // h.assert_true(c.converge(b_delta))
-
     // h.assert_eq[U64](a.at("apple").value(), 5)
     // h.assert_eq[U64](a.at("banana").value(), 3)
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
@@ -145,15 +136,11 @@ class \nodoc\ _TestCKeyspaceDelta is UnitTest
     // h.assert_eq[String](a.string(), b.string())
     // h.assert_eq[String](b.string(), c.string())
     // h.assert_eq[String](c.string(), a.string())
-
     // b_delta = CKeyspace[String, CCounter](0)
-
     // b.clear(b_delta)
-
     // h.assert_true(a.converge(b_delta))
     // h.assert_false(b.converge(b_delta))
     // h.assert_true(c.converge(b_delta))
-
     // h.assert_eq[U64](try a("apple")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("banana")?.value() else 0xDEAD end, 0xDEAD)
     // h.assert_eq[U64](try a("currant")?.value() else 0xDEAD end, 0xDEAD)
@@ -164,16 +151,16 @@ class \nodoc\ _TestCKeyspaceTokens is UnitTest
   fun name(): String => "crdt.CKeyspace (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = CKeyspace[String, CCounter[U8]]("a".hash64())
-    let data'  = CKeyspace[String, CCounter[U8]]("b".hash64())
-    let data'' = CKeyspace[String, CCounter[U8]]("c".hash64())
+    let data    = CKeyspace[String, CCounter[U8]]("a".hash64())
+    let data_b  = CKeyspace[String, CCounter[U8]]("b".hash64())
+    let data_c  = CKeyspace[String, CCounter[U8]]("c".hash64())
 
     data.at("apple").increment(4)
-    data'.at("apple").decrement(5)
-    data''.at("apple").increment(6)
+    data_b.at("apple").decrement(5)
+    data_c.at("apple").increment(6)
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)

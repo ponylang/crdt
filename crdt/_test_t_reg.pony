@@ -5,9 +5,9 @@ class \nodoc\ _TestTReg is UnitTest
   fun name(): String => "crdt.TReg"
 
   fun apply(h: TestHelper) =>
-    let a = TRegString.>update("apple", 3)
-    let b = TRegString.>update("banana", 2)
-    let c = TRegString.>update("currant", 1)
+    let a = TRegString .> update("apple", 3)
+    let b = TRegString .> update("banana", 2)
+    let c = TRegString .> update("currant", 1)
 
     h.assert_eq[String](a.value(), "apple")
     h.assert_eq[String](b.value(), "banana")
@@ -60,9 +60,9 @@ class \nodoc\ _TestTRegDelta is UnitTest
   fun name(): String => "crdt.TReg (ẟ)"
 
   fun apply(h: TestHelper) =>
-    let a = TRegString.>update("apple", 3)
-    let b = TRegString.>update("banana", 2)
-    let c = TRegString.>update("currant", 1)
+    let a = TRegString .> update("apple", 3)
+    let b = TRegString .> update("banana", 2)
+    let c = TRegString .> update("currant", 1)
 
     h.assert_eq[String](a.value(), "apple")
     h.assert_eq[String](b.value(), "banana")

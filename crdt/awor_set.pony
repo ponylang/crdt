@@ -74,7 +74,8 @@ class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
   fun ref set[D: AWORHashSet[A, H] ref = AWORHashSet[A, H]](
     value': A,
     delta': D = recover AWORHashSet[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Add a value to the set.
     Accepts and returns a convergent delta-state.
@@ -88,7 +89,8 @@ class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
   fun ref unset[D: AWORHashSet[A, H] ref = AWORHashSet[A, H]](
     value': A,
     delta': D = recover AWORHashSet[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove a value from the set.
     Accepts and returns a convergent delta-state.
@@ -98,7 +100,8 @@ class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
 
   fun ref clear[D: AWORHashSet[A, H] ref = AWORHashSet[A, H]](
     delta': D = recover AWORHashSet[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all locally visible elements from the set.
     Accepts and returns a convergent delta-state.
@@ -109,7 +112,8 @@ class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
   fun ref union[D: AWORHashSet[A, H] ref = AWORHashSet[A, H]](
     that': Iterator[A],
     delta': D = recover AWORHashSet[A, H](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Add everything in the given iterator to the set.
     Accepts and returns a convergent delta-state.
@@ -160,7 +164,7 @@ class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
   fun ge(that: AWORHashSet[A, H] box): Bool => result().ge(that.result())
   fun values(): Iterator[A]^ => result().values()
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

@@ -62,7 +62,9 @@ class ref THashSet[
     _checklist = DotChecklist(ctx)
 
   fun ref _checklist_write() =>
-    match _checklist | let c: DotChecklist => c.write() end
+    match _checklist
+    | let c: DotChecklist => c.write()
+    end
 
   fun ref _converge_empty_in(ctx: DotContext box): Bool => // ignore the context
     false
@@ -124,7 +126,8 @@ class ref THashSet[
   fun ref clear[D: THashSet[A, T, B, H] ref = THashSet[A, T, B, H]](
     timestamp: T,
     delta: D = recover THashSet[A, T, B, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all elements from the set.
     Accepts and returns a convergent delta-state.
@@ -149,7 +152,8 @@ class ref THashSet[
     value: A,
     timestamp: T,
     delta: D = recover THashSet[A, T, B, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add a value to the set.
     Accepts and returns a convergent delta-state.
@@ -163,7 +167,8 @@ class ref THashSet[
     value: box->A!,
     timestamp: T,
     delta: D = recover THashSet[A, T, B, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove a value from the set.
     Accepts and returns a convergent delta-state.
@@ -176,7 +181,8 @@ class ref THashSet[
   fun ref union[D: THashSet[A, T, B, H] ref = THashSet[A, T, B, H]](
     that: Iterator[(A, T)],
     delta: D = recover THashSet[A, T, B, H] end)
-  : D^ =>
+    : D^
+  =>
     """
     Add everything in the given iterator to the set.
     Accepts and returns a convergent delta-state.
@@ -267,7 +273,7 @@ class ref THashSet[
   fun timestamps(): Iterator[T]^ => map().values()
   fun pairs(): Iterator[(A, T)]^ => map().pairs()
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

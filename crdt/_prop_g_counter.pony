@@ -1,7 +1,8 @@
 use "pony_check"
 use "collections"
 
-class \nodoc\ _GCounterIncProperty is Property1[(USize, Array[_CmdOnReplica[U64]])]
+class \nodoc\ _GCounterIncProperty is
+  Property1[(USize, Array[_CmdOnReplica[U64]])]
   """
   verify that a set of CCounter replicas that are only incremented
   behave like a single U64 counter once completely converged.
@@ -12,21 +13,27 @@ class \nodoc\ _GCounterIncProperty is Property1[(USize, Array[_CmdOnReplica[U64]
     """
     generate a random sequence of increment commands on random replicas
     """
-    Generators.usize(2, 10).flat_map[(USize, Array[_CmdOnReplica[U64]])](
+    Generators.usize(2, 10)
+      .flat_map[(USize, Array[_CmdOnReplica[U64]])](
       {(num_replicas) =>
-        let cmds_gen = Generators.array_of[_CmdOnReplica[U64]](
-          Generators.map2[USize, U64, _CmdOnReplica[U64]](
-            Generators.usize(0, num_replicas-1),
-            Generators.u64(),
-            {(replica, inc) =>
-              _CmdOnReplica[U64](replica, inc) }
+        let cmds_gen =
+          Generators.array_of[_CmdOnReplica[U64]](
+            Generators.map2[USize, U64, _CmdOnReplica[U64]](
+              Generators.usize(0, num_replicas - 1),
+              Generators.u64(),
+              {(replica, inc) =>
+                _CmdOnReplica[U64](replica, inc)}
+            )
           )
-        )
         Generators.zip2[USize, Array[_CmdOnReplica[U64]]](
           Generators.unit[USize](num_replicas), cmds_gen)
       })
 
-  fun property(sample: (USize, Array[_CmdOnReplica[U64]]), h: PropertyHelper) ? =>
+  fun property(
+    sample: (USize, Array[_CmdOnReplica[U64]]),
+    h: PropertyHelper)
+    ?
+  =>
     """
     validate that an array of commands against random replicas
     converges to the same value as a U64 counter exposed to the same commands.

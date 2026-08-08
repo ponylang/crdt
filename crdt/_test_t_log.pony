@@ -4,10 +4,10 @@ class \nodoc\ _TestTLog is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TLog"
 
-  fun apply(h: TestHelper)? =>
-    let a = TLog[String].>raise_cutoff(4)
-    let b = TLog[String].>raise_cutoff(4)
-    let c = TLog[String].>raise_cutoff(4)
+  fun apply(h: TestHelper) ? =>
+    let a = TLog[String] .> raise_cutoff(4)
+    let b = TLog[String] .> raise_cutoff(4)
+    let c = TLog[String] .> raise_cutoff(4)
 
     a.write("apple", 7)
     b.write("banana", 6)
@@ -180,10 +180,10 @@ class \nodoc\ _TestTLogDelta is UnitTest
   new iso create() => None
   fun name(): String => "crdt.TLog (ẟ)"
 
-  fun apply(h: TestHelper)? =>
-    let a = TLog[String].>raise_cutoff(4)
-    let b = TLog[String].>raise_cutoff(4)
-    let c = TLog[String].>raise_cutoff(4)
+  fun apply(h: TestHelper) ? =>
+    let a = TLog[String] .> raise_cutoff(4)
+    let b = TLog[String] .> raise_cutoff(4)
+    let c = TLog[String] .> raise_cutoff(4)
 
     a.write("apple", 7)
     b.write("banana", 6)

@@ -52,13 +52,14 @@ class ref DotKernelSingle[A: Any val] is Replicated
     object is Iterator[A]
       let iter: Iterator[(U64, A)] = _map.values()
       fun ref has_next(): Bool => iter.has_next()
-      fun ref next(): A? => iter.next()?._2
+      fun ref next(): A ? => iter.next()?._2
     end
 
   fun ref update[D: DotKernelSingle[A] ref = DotKernelSingle[A]](
     value': A,
     delta': D = recover DotKernelSingle[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Update the value for this replica in the map of active values.
     The next-sequence-numbered dot for this replica will be used, so that the
@@ -74,7 +75,8 @@ class ref DotKernelSingle[A: Any val] is Replicated
     value': A,
     fn': {(A, A): A^} box,
     delta': D = recover DotKernelSingle[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Update the value for this replica in the map of active values,
     using a function to define the strategy for updating an existing value.
@@ -89,7 +91,8 @@ class ref DotKernelSingle[A: Any val] is Replicated
     D: DotKernelSingle[A] ref = DotKernelSingle[A]](
     value': A,
     delta': D = recover DotKernelSingle[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all dots with this value from the map of active values, using the
     given eq_fn for testing equality between pairs of values of type A.
@@ -117,7 +120,8 @@ class ref DotKernelSingle[A: Any val] is Replicated
 
   fun ref remove_all[D: DotKernelSingle[A] ref = DotKernelSingle[A]](
     delta': D = recover DotKernelSingle[A](0) end)
-  : D^ =>
+    : D^
+  =>
     """
     Remove all dots currently present in the map of active values.
     They will be retained in the causal context.
@@ -150,7 +154,9 @@ class ref DotKernelSingle[A: Any val] is Replicated
     // seen in our history of dots should be added to our map of active values.
     for (id', (n, value)) in that._map.pairs() do
       let dot = (id', n)
-      if (_map.get_or_else(id', (0, value))._1 < n) and (not _ctx.contains(dot)) then
+      if (_map.get_or_else(id', (0, value))._1 < n)
+        and (not _ctx.contains(dot))
+      then
         _map(id') = (n, value)
         changed = true
       end
@@ -220,21 +226,21 @@ class ref DotKernelSingle[A: Any val] is Replicated
     out.append("(DotKernelSingle")
     for (id', (n, value)) in _map.pairs() do
       let dot = (id', n)
-      out.>push(';').>push(' ').>push('(')
+      out .> push(';') .> push(' ') .> push('(')
       out.append(dot._1.string())
-      out.>push(',').>push(' ')
+      out .> push(',') .> push(' ')
       out.append(dot._2.string())
-      out.>push(')').>push(' ').>push('-').>push('>').>push(' ')
+      out .> push(')') .> push(' ') .> push('-') .> push('>') .> push(' ')
       iftype A <: Stringable #read
       then out.append(value.string())
       else out.push('?')
       end
     end
-    out.>push(';').>push(' ')
+    out .> push(';') .> push(' ')
     out.append(_ctx.string())
     out
 
-  fun ref from_tokens(that: TokensIterator)? =>
+  fun ref from_tokens(that: TokensIterator) ? =>
     """
     Deserialize an instance of this data structure from a stream of tokens.
     """

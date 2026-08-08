@@ -105,16 +105,16 @@ class \nodoc\ _TestMVRegTokens is UnitTest
   fun name(): String => "crdt.MVReg (tokens)"
 
   fun apply(h: TestHelper) =>
-    let data   = MVReg[String]("a".hash64())
-    let data'  = MVReg[String]("b".hash64())
-    let data'' = MVReg[String]("c".hash64())
+    let data    = MVReg[String]("a".hash64())
+    let data_b  = MVReg[String]("b".hash64())
+    let data_c  = MVReg[String]("c".hash64())
 
     data.update("apple")
-    data'.update("banana")
-    data''.update("currant")
+    data_b.update("banana")
+    data_c.update("currant")
 
-    data.converge(data')
-    data.converge(data'')
+    data.converge(data_b)
+    data.converge(data_c)
 
     let tokens = Tokens .> from(data)
     _TestTokensWellFormed(h, tokens)
