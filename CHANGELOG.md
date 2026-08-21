@@ -12,7 +12,6 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Changed
 
-- Update to work with Pony 0.69.0 ([PR #36](https://github.com/ponylang/crdt/pull/36))
 
 ## [0.1.0] - 2026-02-19
 
