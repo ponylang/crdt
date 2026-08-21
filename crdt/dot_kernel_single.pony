@@ -154,8 +154,8 @@ class ref DotKernelSingle[A: Any val] is Replicated
     // seen in our history of dots should be added to our map of active values.
     for (id', (n, value)) in that._map.pairs() do
       let dot = (id', n)
-      if (_map.get_or_else(id', (0, value))._1 < n)
-        and (not _ctx.contains(dot))
+      if (_map.get_or_else(id', (0, value))._1 < n) and
+        (not _ctx.contains(dot))
       then
         _map(id') = (n, value)
         changed = true

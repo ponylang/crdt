@@ -81,8 +81,8 @@ class ref TReg[
   fun ref _update_no_delta(value': A, timestamp': T): Bool =>
     if
       (timestamp' > _timestamp) or (
-        (timestamp' == _timestamp)
-      and
+        (timestamp' == _timestamp) and
+
         iftype B <: BiasGreater
         then value' > _value
         else value' < _value
