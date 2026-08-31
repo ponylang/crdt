@@ -1,9 +1,9 @@
 use "collections"
 
-type MVReg[A: (Hashable val & Equatable[A])]
+type MVReg[A: (Hashable val & Equatable[A] val)]
   is MVHashReg[A, HashEq[A]]
 
-type MVRegIs[A: (Hashable val & Equatable[A])]
+type MVRegIs[A: (Hashable val & Equatable[A] val)]
   is MVHashReg[A, HashIs[A]]
 
 class ref MVHashReg[A: Equatable[A] val, H: HashFunction[A] val]

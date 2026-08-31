@@ -1,7 +1,7 @@
 use "collections"
 
 type CKeyspace[
-  K: (Hashable & Equatable[K] val),
+  K: (Hashable val & Equatable[K] val),
   V: (Convergent[V] ref & Replicated ref)]
   is HashCKeyspace[K, V, HashEq[K]]
 

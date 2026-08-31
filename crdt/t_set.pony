@@ -1,13 +1,13 @@
 use "collections"
 
 type TSet[
-  A: (Hashable val & Equatable[A]),
+  A: (Hashable val & Equatable[A] val),
   T: Comparable[T] val = U64,
   B: (BiasInsert | BiasDelete) = BiasInsert]
   is THashSet[A, T, B, HashEq[A]]
 
 type TSetIs[
-  A: (Hashable val & Equatable[A]),
+  A: (Hashable val & Equatable[A] val),
   T: Comparable[T] val = U64,
   B: (BiasInsert | BiasDelete) = BiasInsert]
   is THashSet[A, T, B, HashIs[A]]
