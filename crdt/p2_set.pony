@@ -1,6 +1,6 @@
 use "collections"
 
-type P2Set[A: (Hashable val & Equatable[A])] is P2HashSet[A, HashEq[A]]
+type P2Set[A: (Hashable val & Equatable[A] val)] is P2HashSet[A, HashEq[A]]
 
 type P2SetIs[A: Any val] is P2HashSet[A, HashIs[A]]
 

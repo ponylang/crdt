@@ -1,9 +1,9 @@
 use "collections"
 
-type AWORSet[A: (Hashable val & Equatable[A])]
+type AWORSet[A: (Hashable val & Equatable[A] val)]
   is AWORHashSet[A, HashEq[A]]
 
-type AWORSetIs[A: (Hashable val & Equatable[A])]
+type AWORSetIs[A: (Hashable val & Equatable[A] val)]
   is AWORHashSet[A, HashIs[A]]
 
 class ref AWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]

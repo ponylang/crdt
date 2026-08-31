@@ -1,6 +1,6 @@
 use "collections"
 
-type GSet[A: (Hashable val & Equatable[A])] is GHashSet[A, HashEq[A]]
+type GSet[A: (Hashable val & Equatable[A] val)] is GHashSet[A, HashEq[A]]
 
 type GSetIs[A: Any val] is GHashSet[A, HashIs[A]]
 
