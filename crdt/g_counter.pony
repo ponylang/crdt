@@ -88,7 +88,10 @@ class ref GCounter[A: (Integer[A] val & Unsigned) = U64]
     Accepts and returns a convergent delta-state.
     """
     let v' =
-      _data.upsert(_id, value', {(x, y) => _Math.saturated_sum[A](x, y) })
+      _data.upsert(
+        _id,
+        value',
+        {(x: A, y: A): A => _Math.saturated_sum[A](x, y) })
     _checklist_write()
     delta'._data_update(_id, v')
     consume delta'

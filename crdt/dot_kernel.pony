@@ -278,7 +278,7 @@ class ref DotKernel[A: Any val] is Replicated
     """
     Serialize the data structure, capturing each token into the given Tokens.
     """
-    each_token_map(tokens, {(tokens, a) => tokens.push(a) })
+    each_token_map(tokens, {(tokens: Tokens, a: A) => tokens.push(a) })
 
   fun ref each_token_map(tokens: Tokens, a_fn: {(Tokens, A)} val) =>
     """
