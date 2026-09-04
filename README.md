@@ -28,6 +28,7 @@ See the `examples/` directory for usage demonstrations of each type.
 * `corral add github.com/ponylang/crdt.git --version 0.2.0`
 * `corral fetch` to fetch your dependencies
 * `use "crdt"` to include this package
+* Requires ponyc 0.70.0 or later.
 * `corral run -- ponyc` to compile your application
 
 ## API Documentation
