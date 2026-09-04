@@ -68,7 +68,8 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
     Increment the counter by the given value.
     Accepts and returns a convergent delta-state.
     """
-    _kernel.upsert(value', {(v, value') => v + value' }, delta'._kernel)
+    _kernel.upsert(
+      value', {(v: A, value': A): A => v + value' }, delta'._kernel)
     delta'
 
   fun ref decrement[D: CCounter[A] ref = CCounter[A]](
@@ -80,7 +81,8 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
     Decrement the counter by the given value.
     Accepts and returns a convergent delta-state.
     """
-    _kernel.upsert(-value', {(v, value') => v + value' }, delta'._kernel)
+    _kernel.upsert(
+      -value', {(v: A, value': A): A => v + value' }, delta'._kernel)
     delta'
 
   fun ref clear[D: CCounter[A] ref = CCounter[A]](
