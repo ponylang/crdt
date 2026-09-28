@@ -1,4 +1,4 @@
-use "pony_check"
+use "pony_test"
 use "collections"
 
 primitive \nodoc\ _INC
@@ -47,7 +47,7 @@ class \nodoc\ _CmdOnReplica[T = _CCounterCmd]
         .> append(")")
     end
 
-trait \nodoc\ _CCounterProperty is Property1[(USize, Array[_CmdOnReplica])]
+trait \nodoc\ _CCounterProperty is Property[(USize, Array[_CmdOnReplica])]
   fun property(sample: (USize, Array[_CmdOnReplica]), h: PropertyHelper) ? =>
     """
     validate that an array of commands against random replicas

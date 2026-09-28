@@ -1,8 +1,8 @@
-use "pony_check"
+use "pony_test"
 use "collections"
 
 class \nodoc\ _GCounterIncProperty is
-  Property1[(USize, Array[_CmdOnReplica[U64]])]
+  Property[(USize, Array[_CmdOnReplica[U64]])]
   """
   verify that a set of CCounter replicas that are only incremented
   behave like a single U64 counter once completely converged.

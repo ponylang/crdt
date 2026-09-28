@@ -1,4 +1,4 @@
-use "pony_check"
+use "pony_test"
 use "collections"
 
 class \nodoc\ val _PNCounterCmd is Stringable
@@ -25,7 +25,7 @@ class \nodoc\ val _PNCounterCmd is Stringable
     end
 
 trait \nodoc\ _PNCounterProperty is
-  Property1[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
+  Property[(USize, Array[_CmdOnReplica[_PNCounterCmd]])]
   fun property(
     sample: (USize, Array[_CmdOnReplica[_PNCounterCmd]]),
     h: PropertyHelper)

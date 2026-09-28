@@ -1,5 +1,4 @@
 use "pony_test"
-use "pony_check"
 
 actor \nodoc\ Main is TestList
   new create(env: Env) => PonyTest(env, this)
@@ -52,14 +51,8 @@ actor \nodoc\ Main is TestList
     test(_TestCKeyspaceTokens)
 
     // Property-based tests
-    test(Property1UnitTest[
-      (USize, Array[_CmdOnReplica[U64]])](_GCounterIncProperty))
-    test(Property1UnitTest[
-      (USize, Array[_CmdOnReplica])](_CCounterIncProperty))
-    test(Property1UnitTest[
-      (USize, Array[_CmdOnReplica])](_CCounterIncDecProperty))
-    test(Property1UnitTest[
-      (USize, Array[_CmdOnReplica[_PNCounterCmd]])](_PNCounterIncProperty))
-    test(Property1UnitTest[
-      (USize, Array[_CmdOnReplica[_PNCounterCmd]])](
-      _PNCounterIncDecProperty))
+    test.property(_GCounterIncProperty)
+    test.property(_CCounterIncProperty)
+    test.property(_CCounterIncDecProperty)
+    test.property(_PNCounterIncProperty)
+    test.property(_PNCounterIncDecProperty)
