@@ -22,7 +22,7 @@ class \nodoc\ val _CCounterCmd is Stringable
       } val
     u_cmd = {(t) => if op is _INC then t + diff else t - diff end } val
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     recover
       String()
         .> append(if op is _INC then "+" else "-" end + diff.string())
@@ -36,7 +36,7 @@ class \nodoc\ _CmdOnReplica[T = _CCounterCmd]
     replica = r
     cmd = consume c
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     let str = iftype T <: Stringable #read then cmd.string() else "cmd" end
     recover
       String()

@@ -124,7 +124,7 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
     end
     changed
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the register. If A is Stringable, use
     the string representation of the value; otherwise print as a question mark.
@@ -132,7 +132,7 @@ class ref PNCounter[A: (Integer[A] val & Unsigned) = U64]
     iftype A <: Stringable val then
       value().string()
     else
-      "?".clone()
+      "?"
     end
 
   fun eq(that: PNCounter[A] box): Bool => value().eq(that.value())

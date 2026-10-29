@@ -161,7 +161,7 @@ class ref RWORHashSet[A: Equatable[A] val, H: HashFunction[A] val]
     """
     _kernel.converge_empty_in(ctx')
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the set. If A is a Stringable, use the
     string representation of each value; otherwise print them as question marks.

@@ -141,7 +141,7 @@ class ref P2HashSet[A: Any val, H: HashFunction[A] val]
     """
     _ins.without(_del)
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the set. If A is a Stringable, use the
     string representation of each value; otherwise print them as question marks.

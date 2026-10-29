@@ -97,7 +97,7 @@ class ref GHashSet[A: Any val, H: HashFunction[A] val]
     union(that._data.values())
     orig_size != _data.size()
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the set. If A is a Stringable, use the
     string representation of each value; otherwise print them as question marks.

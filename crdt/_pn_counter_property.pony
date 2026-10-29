@@ -18,7 +18,7 @@ class \nodoc\ val _PNCounterCmd is Stringable
       } val
     u_cmd = {(t) => if op is _INC then t + diff else t - diff end } val
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     recover
       String()
         .> append(if op is _INC then "+" else "-" end + diff.string())
