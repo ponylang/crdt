@@ -236,7 +236,7 @@ class ref THashSet[
     end
     out
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the set. If A is a Stringable box, use the
     string representation of each value; otherwise print the as question marks.

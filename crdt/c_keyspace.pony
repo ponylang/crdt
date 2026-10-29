@@ -124,7 +124,7 @@ class ref HashCKeyspace[
 
     changed
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the map. If K and V are Stringable, use
     string representations of them; otherwise print them as question marks.

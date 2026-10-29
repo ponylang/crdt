@@ -198,7 +198,7 @@ class ref DotContext is Replicated
 
     false
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the data structure.
     This is intended for debugging purposes only.

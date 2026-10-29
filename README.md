@@ -24,7 +24,7 @@ See the `examples/` directory for usage demonstrations of each type.
 
 ## Installation
 
-* Requires ponyc 0.74.0 or later.
+* Requires ponyc 0.78.0 or later.
 
 * Install [corral](https://github.com/ponylang/corral)
 * `corral add github.com/ponylang/crdt.git --version 0.3.0`

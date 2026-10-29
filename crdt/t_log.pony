@@ -280,7 +280,7 @@ class ref TLog[
 
     changed
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the log. If A and T are Stringable, use
     the string representation of them; otherwise print as question marks.

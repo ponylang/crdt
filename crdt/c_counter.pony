@@ -110,7 +110,7 @@ class ref CCounter[A: (Integer[A] val & (Unsigned | Signed)) = U64]
     """
     _kernel.converge_empty_in(ctx')
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Print the value of the counter.
     """

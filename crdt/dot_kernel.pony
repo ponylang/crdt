@@ -213,7 +213,7 @@ class ref DotKernel[A: Any val] is Replicated
 
     changed
 
-  fun string(): String iso^ =>
+  fun string(): String =>
     """
     Return a best effort at printing the data structure.
     This is intended for debugging purposes only.
