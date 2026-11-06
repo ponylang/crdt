@@ -55,7 +55,7 @@ trait \nodoc\ _CCounterProperty is Property[(USize, Array[_CmdOnReplica])]
     """
     (let num_replicas, let commands) = sample
     let replicas: Array[CCounter] = replicas.create(num_replicas)
-    for x in Range[U64](0, num_replicas.u64()) do
+    for x in Range[U64].till(0, num_replicas.u64()) do
       replicas.push(CCounter(x))
     end
 
